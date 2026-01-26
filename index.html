@@ -3,78 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZoroX - Loading</title>
+    <title>ZoroX TV</title>
     <style>
-        /* Loading screen එකේ පෙනුම */
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            background-color: #0f0f0f; /* කළු පැහැති පසුබිමක් */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100%;
+            width: 100%;
             overflow: hidden;
+            background-color: #000;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .loader-container {
-            text-align: center;
+        /* Loading Screen Style */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0f0f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
         .brand-name {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: bold;
-            margin-bottom: 10px;
-            letter-spacing: 5px;
-            color: #ff4500; /* ZoroX සඳහා තැඹිලි/රතු පැහැයක් */
-            text-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+            color: #ff4500;
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.7);
+            margin-bottom: 20px;
         }
 
-        .loading-text {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        /* Loading පටිත්ත (Progress bar) */
-        .progress-bar {
-            width: 200px;
-            height: 4px;
-            background: #333;
-            margin-top: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 0%;
+        /* Video Frame Style */
+        #video-frame {
+            width: 100%;
             height: 100%;
-            background: #ff4500;
-            animation: loading 3s forwards;
-        }
-
-        @keyframes loading {
-            0% { width: 0%; }
-            100% { width: 100%; }
+            border: none;
+            display: none; /* මුලින් හංගලා තියෙන්නේ */
         }
     </style>
 </head>
 <body>
 
-    <div class="loader-container">
+    <div id="loader">
         <div class="brand-name">ZoroX</div>
-        <div class="loading-text">INITIALIZING...</div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+        <div style="color: white; letter-spacing: 2px;">LOADING...</div>
     </div>
 
+    <iframe id="video-frame" 
+            src="https://allrounderlive.pages.dev/p6?url=https://dillzyserver.dillzycreations.workers.dev/live/hotstar.m3u8" 
+            allowfullscreen>
+    </iframe>
+
     <script>
-        // තත්පර 3කට පසු ඔබේ URL එකට redirect කිරීම
-        setTimeout(function() {
-            window.location.href = "https://allrounderlive.pages.dev/p6?url=https://dillzyserver.dillzycreations.workers.dev/live/hotstar.m3u8";
-        }, 3500); // 3500ms කියන්නේ තත්පර 3.5ක්
+        window.onload = function() {
+            // තත්පර 4කට පසු ලෝඩින් ස්ක්‍රීන් එක අයින් කර වීඩියෝව පෙන්වන්න
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('video-frame').style.display = 'block';
+            }, 4000);
+        };
     </script>
 
 </body>
